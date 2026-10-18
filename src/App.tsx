@@ -95,9 +95,13 @@ export default function App() {
 
       {/* Main Content */}
       <main className="max-w-[1600px] mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 xl:gap-5">
+        <div style={{ 
+          display: 'grid', 
+          gridTemplateColumns: '1fr',
+          gap: '1.25rem'
+        }} className="main-grid">
           {/* Left Column - Range Grid */}
-          <div className="lg:col-span-5 space-y-4">
+          <div className="range-column">
             <RangeGrid
               selectedCells={selectedCells}
               onToggleCell={handleToggleCell}
@@ -108,7 +112,7 @@ export default function App() {
             />
             
             {/* Range Notation Input */}
-            <div className="bg-[#16213e] rounded-xl p-3 shadow-lg">
+            <div className="bg-[#16213e] rounded-xl p-3 shadow-lg mt-4">
               <div className="text-xs text-gray-400 mb-2 font-medium">📝 Notació de Rang (ex: AA+, AKs+, KQo)</div>
               <div className="flex gap-2">
                 <input
@@ -150,7 +154,7 @@ export default function App() {
           </div>
 
           {/* Center Column - Board */}
-          <div className="lg:col-span-3">
+          <div className="board-column">
             <BoardSelector
               boardCards={boardCards}
               street={street}
@@ -160,7 +164,7 @@ export default function App() {
           </div>
 
           {/* Right Column - Results */}
-          <div className="lg:col-span-4">
+          <div className="results-column">
             <Results 
               result={analysisResult} 
               isAnalyzing={false}

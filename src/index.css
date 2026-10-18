@@ -11,6 +11,24 @@
   grid-template-columns: repeat(13, minmax(0, 1fr));
 }
 
+/* Main layout - 3 columns */
+.main-grid {
+  grid-template-columns: 1fr;
+}
+
+.range-column,
+.board-column,
+.results-column {
+  width: 100%;
+}
+
+/* Desktop layout - 3 columns */
+@media (min-width: 1024px) {
+  .main-grid {
+    grid-template-columns: 5fr 3fr 4fr;
+  }
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
