@@ -11,7 +11,7 @@ interface ResultsProps {
 export default function Results({ result, isAnalyzing, hasRange }: ResultsProps) {
   if (!hasRange) {
     return (
-      <div className="bg-[#16213e] rounded-xl p-6 shadow-lg">
+      <div className="bg-[#16213e] rounded-xl p-6 shadow-lg h-full flex flex-col justify-center">
         <h2 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
           📊 Resultats de l'Anàlisi
         </h2>
@@ -64,7 +64,7 @@ export default function Results({ result, isAnalyzing, hasRange }: ResultsProps)
   };
 
   return (
-    <div className="bg-[#16213e] rounded-xl p-4 shadow-lg animate-slide-in">
+    <div className="bg-[#16213e] rounded-xl p-4 shadow-lg animate-slide-in h-full">
       <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
         📊 Resultats de l'Anàlisi
       </h2>

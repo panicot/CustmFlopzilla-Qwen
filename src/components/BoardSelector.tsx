@@ -70,7 +70,7 @@ export default function BoardSelector({ boardCards, street, onStreetChange, onBo
   };
 
   return (
-    <div className="bg-[#16213e] rounded-xl p-4 shadow-lg">
+    <div className="bg-[#16213e] rounded-xl p-4 shadow-lg h-full flex flex-col">
       <h2 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
         🃏 Board
       </h2>
@@ -87,20 +87,21 @@ export default function BoardSelector({ boardCards, street, onStreetChange, onBo
               }
             }}
             className={`
-              px-4 py-2 rounded-lg text-sm font-medium transition-all
+              flex-1 px-2 py-2 rounded-lg text-xs font-medium transition-all
               ${street === s
                 ? 'bg-[#6d4aff] text-white shadow-lg'
                 : 'bg-gray-700/50 text-gray-400 hover:bg-gray-700 hover:text-white'
               }
             `}
           >
-            {s.charAt(0).toUpperCase() + s.slice(1)} ({STREET_SIZES[s]})
+            {s.charAt(0).toUpperCase() + s.slice(1)}
+            <span className="block text-[10px] opacity-70">({STREET_SIZES[s]})</span>
           </button>
         ))}
       </div>
 
       {/* Card Slots */}
-      <div className="flex gap-2 mb-4 flex-wrap">
+      <div className="flex gap-1.5 mb-4 justify-center flex-wrap">
         {Array.from({ length: maxCards }, (_, i) => {
           const card = boardCards[i];
           return (
@@ -108,8 +109,8 @@ export default function BoardSelector({ boardCards, street, onStreetChange, onBo
               key={i}
               onClick={() => handleSlotClick(i)}
               className={`
-                w-14 h-20 rounded-lg border-2 flex items-center justify-center
-                transition-all duration-200 text-lg font-bold
+                w-12 h-16 sm:w-14 sm:h-20 rounded-lg border-2 flex items-center justify-center
+                transition-all duration-200 text-base sm:text-lg font-bold
                 ${card
                   ? 'border-[#6d4aff] bg-white/10 hover:border-red-500'
                   : 'border-dashed border-gray-600 bg-gray-800/50 hover:border-gray-400'
@@ -121,16 +122,20 @@ export default function BoardSelector({ boardCards, street, onStreetChange, onBo
                   {card.rank}{SUIT_SYMBOLS[card.suit]}
                 </span>
               ) : (
-                <span className="text-gray-600 text-2xl">+</span>
+                <span className="text-gray-600 text-xl">+</span>
               )}
             </button>
           );
         })}
+      </div>
+
+      {/* Clear button */}
+      <div className="flex justify-center mb-3">
         <button
           onClick={handleClear}
-          className="ml-2 px-3 py-2 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors self-center"
+          className="px-3 py-1.5 text-xs bg-gray-700 hover:bg-gray-600 text-gray-300 rounded-lg transition-colors"
         >
-          🗑️ Netejar
+          🗑️ Netejar Board
         </button>
       </div>
 
@@ -142,33 +147,33 @@ export default function BoardSelector({ boardCards, street, onStreetChange, onBo
           onChange={(e) => setInputValue(e.target.value)}
           onKeyDown={(e) => e.key === 'Enter' && handleTextSubmit()}
           placeholder='Ex: "Ah Qd 5c"'
-          className="flex-1 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm placeholder-gray-500 focus:border-[#6d4aff] focus:outline-none"
+          className="flex-1 px-3 py-2 bg-gray-800 border border-gray-600 rounded-lg text-white text-sm placeholder-gray-500 focus:border-[#6d4aff] focus:outline-none min-w-0"
         />
         <button
           onClick={handleTextSubmit}
-          className="px-4 py-2 bg-[#6d4aff] hover:bg-[#5a3de8] text-white rounded-lg text-sm font-medium transition-colors"
+          className="px-3 py-2 bg-[#6d4aff] hover:bg-[#5a3de8] text-white rounded-lg text-sm font-medium transition-colors flex-shrink-0"
         >
-          Afegir
+          +
         </button>
       </div>
 
       {/* Card Picker */}
       {showCardPicker && (
-        <div className="bg-gray-800 rounded-lg p-3 border border-gray-600 mt-2">
+        <div className="bg-gray-800 rounded-lg p-2 border border-gray-600 mt-auto">
           <div className="flex justify-between items-center mb-2">
-            <span className="text-xs text-gray-400">Selecciona una carta:</span>
-            <button onClick={() => setShowCardPicker(false)} className="text-gray-400 hover:text-white text-sm">✕</button>
+            <span className="text-[10px] text-gray-400">Selecciona carta:</span>
+            <button onClick={() => setShowCardPicker(false)} className="text-gray-400 hover:text-white text-xs">✕</button>
           </div>
           {/* Suit headers */}
-          <div className="grid grid-cols-4 gap-1 mb-1">
+          <div className="grid grid-cols-4 gap-0.5 mb-0.5">
             {SUITS.map(suit => (
-              <div key={suit} className="text-center text-xs font-bold" style={{ color: SUIT_COLORS[suit] }}>
+              <div key={suit} className="text-center text-[10px] font-bold" style={{ color: SUIT_COLORS[suit] }}>
                 {SUIT_SYMBOLS[suit]}
               </div>
             ))}
           </div>
           {/* Card grid: 13 rows × 4 columns */}
-          <div className="grid grid-cols-4 gap-1">
+          <div className="grid grid-cols-4 gap-0.5">
             {RANKS.map(rank =>
               SUITS.map(suit => {
                 const cardStr = `${rank}${suit}`;
@@ -179,7 +184,7 @@ export default function BoardSelector({ boardCards, street, onStreetChange, onBo
                     onClick={() => !isOnBoard && handleCardPick(rank, suit)}
                     disabled={isOnBoard}
                     className={`
-                      py-1.5 flex items-center justify-center rounded text-sm font-bold
+                      py-1 flex items-center justify-center rounded text-xs font-bold
                       transition-all
                       ${isOnBoard
                         ? 'bg-gray-700/30 text-gray-600 cursor-not-allowed'

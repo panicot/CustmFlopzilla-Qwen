@@ -94,10 +94,10 @@ export default function App() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Left Column */}
-          <div className="space-y-4">
+      <main className="max-w-[1600px] mx-auto px-4 py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 xl:gap-5">
+          {/* Left Column - Range Grid */}
+          <div className="lg:col-span-5 space-y-4">
             <RangeGrid
               selectedCells={selectedCells}
               onToggleCell={handleToggleCell}
@@ -126,7 +126,7 @@ export default function App() {
                   Afegir
                 </button>
               </div>
-              <div className="flex gap-2 mt-2">
+              <div className="flex gap-2 mt-2 flex-wrap">
                 <button
                   onClick={() => { setRangeText('AA+, AKs+'); }}
                   className="text-[10px] px-2 py-1 bg-gray-700/50 hover:bg-gray-700 text-gray-400 hover:text-white rounded transition-colors"
@@ -149,14 +149,18 @@ export default function App() {
             </div>
           </div>
 
-          {/* Right Column */}
-          <div className="space-y-6">
+          {/* Center Column - Board */}
+          <div className="lg:col-span-3">
             <BoardSelector
               boardCards={boardCards}
               street={street}
               onStreetChange={setStreet}
               onBoardChange={setBoardCards}
             />
+          </div>
+
+          {/* Right Column - Results */}
+          <div className="lg:col-span-4">
             <Results 
               result={analysisResult} 
               isAnalyzing={false}
@@ -166,7 +170,7 @@ export default function App() {
         </div>
 
         {/* Info Section */}
-        <div className="mt-8 bg-[#16213e] rounded-xl p-4 shadow-lg">
+        <div className="mt-6 bg-[#16213e] rounded-xl p-4 shadow-lg">
           <h3 className="text-sm font-bold text-gray-300 mb-2">ℹ️ Com funciona</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs text-gray-400">
             <div>
