@@ -1,0 +1,72 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #6d4aff;
+  --color-bg: #1a1a2e;
+  --color-card: #16213e;
+}
+
+/* Custom 13-column grid */
+.grid-cols-13 {
+  grid-template-columns: repeat(13, minmax(0, 1fr));
+}
+
+/* Main layout - 3 columns */
+.main-grid {
+  grid-template-columns: 1fr;
+}
+
+.range-column,
+.board-column,
+.results-column {
+  width: 100%;
+}
+
+/* Desktop layout - 3 columns */
+@media (min-width: 1024px) {
+  .main-grid {
+    grid-template-columns: 5fr 3fr 4fr;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1a1a2e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #6d4aff;
+  border-radius: 3px;
+}
+
+/* Smooth transitions for all interactive elements */
+button {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* Card picker grid fix */
+.grid-cols-13 > button {
+  min-width: 0;
+}
+
+/* Animation for results */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-slide-in {
+  animation: slideIn 0.3s ease-out;
+}
